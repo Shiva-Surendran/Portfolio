@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfolio</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Sofia">
+    <link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Roboto+Mono'>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/2.0.2/anime.min.js"></script>
+</head>
+
+<body>
+    <header>
+        <h1>Shiva Surendran</h1>
+        <div class="header-links">
+            <a href="#home">Home</a>
+            <a href="#about">About</a>
+            <a href="#project">Project</a>
+        </div>
+    </header>
+
+    <section id="home" class="home">
+        <h1 id="welcome-text" class="ml2">Welcome to my Portfolio!</h1>
+        <h2 id="welcome-text2" style="display: none;">
+            Hi, I am Shiva<br>
+            Front-end developer and Architectural Designer.<br>
+            Currently Studying in Cochin University of Science and Technology, Kochi
+        </h2>
+        <a href="#about"><i class="fa fa-angle-down" id="scroll-down" style="font-size: 48px; color: #fff;"></i></a>
+    </section>
+
+    <section id="about" class="about">
+        <p>Welcome to my corner of the web.</p>
+        <p>I'm a passionate designer dedicated to creating stunning webpages and architectural models. This space is a
+            showcase of my work, where you can explore my latest projects, learn more about my skills and experience,
+            and get in touch for potential collaborations.</p>
+            <h3 class="con">Contact me at shivaasurendran@gmail.com</h3>
+
+    </section>
+
+    <section id="project" class="project">
+        <p class="ptitle">My Projects</p>
+
+        <div class="work-item">
+            <h3>4f Builders Website</h3>
+            <p>The 4f Builders & Engineering Pvt. Ltd website is designed to provide comprehensive information about the
+                company. The site features detailed sections on the range of services, showcasing a portfolio of past
+                projects with images and descriptions, and introduces the team members. The website was designed
+                primarily using Svelte.</p>
+        </div>
+        <div class="work-item">
+            <h3>Care Connect App</h3>
+            <p>Created an app for monitoring isolated individuals and senior citizens to ensure their wellbeing. CareConnect
+                checks the inactivity of the beneficiary and if there is a discrepancy it will inform the caretaker. Also, the app
+                incorporates scream detection, fall detection, emergency call and SMS feature, and pill reminder.
+                Technologies: Flutter
+                </p>
+        </div>
+        <div class="work-item">
+            <h3>URLcomments</h3>
+            <p>URL Comments is a tool designed to enable users to comment on any website, even those where the comment section
+                 is disabled. This initiative aims to promote democratic discussion and enhance community interaction 
+                 across the web.(Development Stage)  </p>
+        </div>
+    </section>
+    
+
+    <footer>
+        <p>&copy; 2024 Copyleft</p>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            var welcomeText = document.getElementById('welcome-text');
+            var opacity = 0;
+            var intervalID = setInterval(function () {
+                if (opacity < 9) {
+                    opacity += 0.4;
+                    welcomeText.style.opacity = opacity;
+                } else {
+                    clearInterval(intervalID);
+                    var welcomeText2 = document.getElementById('welcome-text2');
+                    welcomeText.style.display = 'none';
+                    welcomeText2.style.display = 'block';
+                }
+            }, 125);
+        });
+
+        var textWrapper = document.querySelector('.ml2');
+        textWrapper.innerHTML = textWrapper.textContent.replace(/\S/g, "<span class='letter'>$&</span>");
+        anime.timeline({ loop: true })
+            .add({
+                targets: '.ml2 .letter',
+                scale: [2, 1],
+                opacity: 10,
+                translateZ: 0,
+                easing: "easeOutExpo",
+                duration: 1050,
+                delay: (el, i) => 100 * i
+            });
+
+        document.addEventListener('DOMContentLoaded', function () {
+            var headerHeight = document.querySelector('header').offsetHeight;
+
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+
+                    var target = document.querySelector(this.getAttribute('href'));
+                    var offsetTop = target.offsetTop;
+
+                    window.scrollTo({
+                        top: offsetTop - headerHeight,
+                        behavior: 'smooth'
+                    });
+                });
+            });
+
+            var scrollDown = document.getElementById('scroll-down');
+            scrollDown.addEventListener('click', function () {
+                var aboutSection = document.getElementById('about');
+                var offsetTop = aboutSection.offsetTop;
+                window.scrollTo({
+                    top: offsetTop - headerHeight,
+                    behavior: 'smooth'
+                });
+            });
+        });
+    </script>
+</body>
+
+</html>
